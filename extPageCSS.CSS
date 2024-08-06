@@ -1,0 +1,112 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+}
+
+.mainWindow {
+    background-color: #f5fffe;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.main{
+    background-color: #f5fffe;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 20% auto 10% 10%;
+    grid-template-rows: 1fr;
+}
+
+.editorText{
+    justify-self: center;
+    align-self: center;
+    background-color: aliceblue;
+    height: 70%;
+    width: 90%;
+    border: 2px solid black;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    border-radius: 10px;
+    z-index: 1;
+
+}
+
+.textPanelText{
+    height: 100%;
+
+}
+
+.tox-statusbar__branding{
+    display: none;
+}
+
+.tox-statusbar__path-item{
+    visibility: hidden;
+}
+
+.editorPanelContainer{
+    grid-column-start: 3;
+    grid-row-start: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#sepFuncPanel{
+    width: 80%;
+    height: 60%;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+}
+
+#allInOneButton{
+    margin-top: 20px;
+    width: 80%;
+    height: 5%;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    display: grid;
+}
+
+.sepButton{
+    border-radius: 8px;
+}
+
+
+.upperInstrButton{
+    border-radius: 8px 8px 0 0;
+}
+
+#spanDelete{
+}
+
+#nbspDeleteAll{
+}
+
+.lowerInstrButton{
+    border-radius: 0 0 8px 8px;
+
+}
+
+.instrButton{
+    font-size: 1.2vw;
+    font-family: "Helvetica", "serif";
+    border: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.instrButton:hover{
+    background-color: gray;
+    text-decoration: underline;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>AutoText</title>
+    <link href="extPageCSS.CSS" rel="stylesheet">
+</head>
+<body>
+<div class="mainWindow">
+    <main class="main">
+        <div class="editorText">
+            <div class="textPanelText">
+                <div id="textTextArea"></div>
+            </div>
+        </div>
+        <div class="editorPanelContainer">
+            <div id="sepFuncPanel">
+                <button id="strongDelete" class="instrButton upperInstrButton"> &lt;strong&gt; </button>
+                <button id="spanDelete" class="instrButton"> &lt;span&gt; </button>
+                <button id="iDelete" class="instrButton"> &lt;i&gt; </button>
+                <button id="bDelete" class="instrButton"> &lt;b&gt; </button>
+                <button id="emDelete" class="instrButton"> &lt;em&gt; </button>
+                <button id="pInLiDelete" class="instrButton"> &lt;p&gt; в &lt;li&gt; </button>
+                <button id="pInTdDelete" class="instrButton"> &lt;p&gt; в &lt;td&gt; </button>
+                <button id="dirDelete" class="instrButton"> dir="" </button>
+                <button id="styleDelete" class="instrButton"> style="" </button>
+                <button id="nbspDeleteAll" class="instrButton"> &amp;nbsp </button>
+                <button id="nbspDeleteW/Dot" class="instrButton"> .&amp;nbsp </button>
+                <button id="allAttrDelete" class="instrButton lowerInstrButton"> Все атрибуты </button>
+            </div>
+            <div id="allInOneButton">
+                <button id="almightyButton" class="instrButton sepButton"> Очистить всё </button>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+<script type="text/javascript" src="tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="extEditor_tinyMCE.js"></script>
+<script type="text/javascript" src="extEditor.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+'usestrict';
+
+
+
+
+
+const body = document.getElementById("tinymce");
+const strongDeleteButton = document.getElementById("strongDelete");
+const spanDeleteButton = document.getElementById("spanDelete");
+const nbspDeleteButton = document.getElementById("nbspDeleteAll")
+const nbspWDotDeleteButton = document.getElementById("nbspDeleteW/Dot")
+const dirDeleteButton = document.getElementById("dirDelete");
+const iDeleteButton = document.getElementById("iDelete");
+const bDeleteButton = document.getElementById("bDelete");
+const emDeleteButton = document.getElementById("emDelete");
+const pInLiDeleteButton = document.getElementById("pInLiDelete");
+const pInTdtDeleteButton = document.getElementById("pInTdDelete");
+const styleDeleteButton = document.getElementById("styleDelete");
+const allAttrDeleteButton = document.getElementById("allAttrDelete");
+const almightyButton = document.getElementById("almightyButton");
+
+let innerText = undefined;
+let textToPaste = undefined;
+
+/* Старая функция
+function replacer(thingToReplace){
+    innerText = tinyMCE.activeEditor.getContent();
+    textToPaste = innerText.replaceAll('<' + thingToReplace + '>', '');
+    textToPaste = textToPaste.replaceAll('</' + thingToReplace + '>', '');
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+}
+*/
+
+//Удаляет теги <tag ...> ... </tag ...>
+function tagRemover(thingToRemove){
+    innerText = tinyMCE.activeEditor.getContent();
+    textToPaste = innerText;
+    let index = textToPaste.indexOf("<" + thingToRemove);
+
+    while(index > 0){
+        textToPaste = textToPaste.replace(textToPaste.substring(index, textToPaste.indexOf(">", index) + 1) , "");
+        index = textToPaste.indexOf("<" + thingToRemove);
+
+    }
+    index = textToPaste.indexOf("</" + thingToRemove);
+
+    while(index > 0){
+        textToPaste = textToPaste.replace(textToPaste.substring(index, textToPaste.indexOf(">", index) + 1) , "");
+        index = textToPaste.indexOf("</" + thingToRemove);
+    }
+
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+    index = undefined;
+}
+
+function tagRemoverMiddle(innerText, thingToRemove) {
+    textToPaste = innerText;
+    let index = textToPaste.indexOf("<" + thingToRemove);
+
+    while (index > 0) {
+        textToPaste = textToPaste.replace(textToPaste.substring(index, textToPaste.indexOf(">", index) + 1), "");
+        index = textToPaste.indexOf("<" + thingToRemove);
+
+    }
+    index = textToPaste.indexOf("</" + thingToRemove);
+
+    while (index > 0) {
+        textToPaste = textToPaste.replace(textToPaste.substring(index, textToPaste.indexOf(">", index) + 1), "");
+        index = textToPaste.indexOf("</" + thingToRemove);
+    }
+    return textToPaste;
+}
+
+//Удаляет все включения word
+function wordRemover(thingToRemove, filler = ""){
+    innerText = tinyMCE.activeEditor.getContent();
+    textToPaste = innerText;
+    textToPaste = textToPaste.replaceAll(thingToRemove, filler)
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+}
+
+//Удаляет все атрибуты типа attr="..."
+function attributeRemover(thingToRemove){
+    innerText = tinyMCE.activeEditor.getContent();
+    textToPaste = innerText;
+    let index = textToPaste.indexOf(thingToRemove);
+    while(index > 0){
+        textToPaste = textToPaste.replace(textToPaste.substring(index, textToPaste.indexOf('"', textToPaste.indexOf('"', index)) + 1) , "");
+        index = textToPaste.indexOf(thingToRemove);
+    }
+
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+    index = undefined;
+}
+
+
+//Удаляет тег внутри определённого тега
+function tagWithinTagRemover(thingToRemove, outerTag){
+    innerText = tinymce.activeEditor.getContent();
+    textToPaste = innerText;
+
+    let indexOuter = textToPaste.indexOf("<" + outerTag);
+    let indexOuterClose = textToPaste.indexOf("</" + outerTag, indexOuter);
+
+    while(indexOuter >= 0){
+        textToPaste = textToPaste.replace(textToPaste.substring(indexOuter, indexOuterClose), tagRemoverMiddle(textToPaste.substring(indexOuter, indexOuterClose), thingToRemove));
+        indexOuter = textToPaste.indexOf("<" + outerTag, indexOuter + 1);
+        indexOuterClose = textToPaste.indexOf("</" + outerTag, indexOuter);
+    }
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+    indexOuter = undefined;
+    indexOuterClose = undefined;
+}
+
+function findHref(textToAnalyze){
+    let indexHrefSt = textToAnalyze.indexOf("href");
+    let indexHrefEd = undefined;
+    let textToAnalyzeWithHref = undefined;
+    if (indexHrefSt > -1){
+        indexHrefEd = textToAnalyze.indexOf('"', textToAnalyze.indexOf('"', indexHrefSt) + 1);
+        textToAnalyzeWithHref = textToAnalyze.substring(indexHrefSt, indexHrefEd + 1)
+        return " " + textToAnalyzeWithHref;
+    }
+    else {
+        return ""
+    }
+
+}
+
+//Просто удаляет всё внутри тега, начиная от пробела после наименования тега и до ">"
+function allAttrRemover(){
+    innerText = tinymce.activeEditor.getContent();
+    textToPaste = innerText;
+    let indexLeftBr = textToPaste.indexOf("<");
+    let indexRightBr = textToPaste.indexOf(">");
+    let index = textToPaste.indexOf(" ", indexLeftBr);
+    let stringLenght = 0;
+    let substring = undefined;
+    let stringToSave = undefined;
+
+    while(indexLeftBr >= 0){
+        if (index > indexLeftBr && index < indexRightBr){
+            substring = textToPaste.substring(index, indexRightBr)
+            stringToSave = findHref(substring);
+            stringLenght = [...substring].length - [...stringToSave].length;
+            textToPaste = textToPaste.replace(substring, stringToSave);
+            indexLeftBr = textToPaste.indexOf("<", indexLeftBr + 1);
+            indexRightBr = textToPaste.indexOf(">", indexRightBr - stringLenght + 1);
+            index = textToPaste.indexOf(" ", indexLeftBr);
+        }
+        else{
+            indexLeftBr = textToPaste.indexOf("<", indexRightBr);
+            indexRightBr = textToPaste.indexOf(">", indexLeftBr);
+            index = textToPaste.indexOf(" ", indexLeftBr);
+        }
+
+    }
+    tinyMCE.activeEditor.setContent(textToPaste);
+    innerText = undefined;
+    textToPaste = undefined;
+    index = undefined;
+    stringLenght = undefined;
+    substring = undefined;
+}
+
+strongDeleteButton.onclick = () => tagRemover("strong");
+spanDeleteButton.onclick = () => tagRemover("span");
+nbspDeleteButton.onclick = () => {wordRemover("&nbsp;");
+    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>")};
+nbspWDotDeleteButton.onclick = () => {wordRemover(".&nbsp;", ".");
+    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>")};
+dirDeleteButton.onclick = () => attributeRemover("dir");
+iDeleteButton.onclick = () => tagRemover("i");
+bDeleteButton.onclick = () => tagRemover("b");
+emDeleteButton.onclick = () => tagRemover("em");
+pInLiDeleteButton.onclick = () => tagWithinTagRemover("p", "li");
+pInTdtDeleteButton.onclick = () => tagWithinTagRemover("p", "td");
+styleDeleteButton.onclick = () => attributeRemover("style");
+allAttrDeleteButton.onclick = () => allAttrRemover();
+almightyButton.onclick = () => {
+    tagRemover("strong");
+    tagRemover("span");
+    wordRemover("&nbsp;");
+    attributeRemover("dir");
+    tagRemover("i");
+    tagRemover("b");
+    tagRemover("em");
+    tagWithinTagRemover("p", "li");
+    tagWithinTagRemover("p", "td");
+    attributeRemover("style");
+    allAttrRemover();
+    wordRemover("<p></p>");
+    wordRemover("<p>&nbsp;</p>");
+}

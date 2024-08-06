@@ -1,0 +1,16 @@
+{
+  "name": "AutoEdit",
+  "version": "0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": "images/extIcon.png",
+    "default_title": "Time to edit"
+  },
+  "icons": {
+    "16": "/images/extIcon.png"
+  },
+  "background": {
+    "service_worker": "service_worker.js",
+    "type": "module"
+}
+}
