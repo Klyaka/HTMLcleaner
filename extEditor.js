@@ -18,20 +18,11 @@ const pInTdtDeleteButton = document.getElementById("pInTdDelete");
 const styleDeleteButton = document.getElementById("styleDelete");
 const allAttrDeleteButton = document.getElementById("allAttrDelete");
 const almightyButton = document.getElementById("almightyButton");
+const htmlViewElement = document.getElementById("sourceView")
+
 
 let innerText = undefined;
 let textToPaste = undefined;
-
-/* Старая функция
-function replacer(thingToReplace){
-    innerText = tinyMCE.activeEditor.getContent();
-    textToPaste = innerText.replaceAll('<' + thingToReplace + '>', '');
-    textToPaste = textToPaste.replaceAll('</' + thingToReplace + '>', '');
-    tinyMCE.activeEditor.setContent(textToPaste);
-    innerText = undefined;
-    textToPaste = undefined;
-}
-*/
 
 //Удаляет теги <tag ...> ... </tag ...>
 function tagRemover(thingToRemove){
@@ -151,6 +142,7 @@ function allAttrRemover(){
     while(indexLeftBr >= 0){
         if (index > indexLeftBr && index < indexRightBr){
             substring = textToPaste.substring(index, indexRightBr)
+            console.log(substring)
             stringToSave = findHref(substring);
             stringLenght = [...substring].length - [...stringToSave].length;
             textToPaste = textToPaste.replace(substring, stringToSave);
@@ -173,20 +165,26 @@ function allAttrRemover(){
     substring = undefined;
 }
 
-strongDeleteButton.onclick = () => tagRemover("strong");
-spanDeleteButton.onclick = () => tagRemover("span");
+function paste(){
+    innerText = tinymce.activeEditor.getContent();
+    htmlViewElement.innerText = innerText;
+}
+
+
+strongDeleteButton.onclick = () => {tagRemover("strong"); paste()};
+spanDeleteButton.onclick = () => {tagRemover("span"); paste()};
 nbspDeleteButton.onclick = () => {wordRemover("&nbsp;");
-    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>")};
+    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>"); paste()};
 nbspWDotDeleteButton.onclick = () => {wordRemover(".&nbsp;", ".");
-    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>")};
-dirDeleteButton.onclick = () => attributeRemover("dir");
-iDeleteButton.onclick = () => tagRemover("i");
-bDeleteButton.onclick = () => tagRemover("b");
-emDeleteButton.onclick = () => tagRemover("em");
-pInLiDeleteButton.onclick = () => tagWithinTagRemover("p", "li");
-pInTdtDeleteButton.onclick = () => tagWithinTagRemover("p", "td");
-styleDeleteButton.onclick = () => attributeRemover("style");
-allAttrDeleteButton.onclick = () => allAttrRemover();
+    wordRemover("<p></p>"); wordRemover("<p>&nbsp;</p>"); paste()};
+dirDeleteButton.onclick = () => {attributeRemover("dir"); paste()};
+iDeleteButton.onclick = () => {tagRemover("i"); paste()};
+bDeleteButton.onclick = () => {tagRemover("b"); paste()};
+emDeleteButton.onclick = () => {tagRemover("em"); paste()};
+pInLiDeleteButton.onclick = () => {tagWithinTagRemover("p", "li"); paste()};
+pInTdtDeleteButton.onclick = () => {tagWithinTagRemover("p", "td"); paste()};
+styleDeleteButton.onclick = () => {attributeRemover("style"); paste()};
+allAttrDeleteButton.onclick = () => {allAttrRemover(); paste()};
 almightyButton.onclick = () => {
     tagRemover("strong");
     tagRemover("span");
@@ -201,4 +199,5 @@ almightyButton.onclick = () => {
     allAttrRemover();
     wordRemover("<p></p>");
     wordRemover("<p>&nbsp;</p>");
+    paste();
 }
