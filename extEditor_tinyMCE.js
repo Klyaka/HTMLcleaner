@@ -14,5 +14,7 @@ tinymce.init({
     license_key: 'gpl',
     paste_data_images: true,
     paste_enable_default_filters: false,
-    paste_remove_styles_if_webkit: false
+    paste_remove_styles_if_webkit: false,
+    statusbar: false,
+
 });

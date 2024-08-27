@@ -6,8 +6,9 @@
     <link href="extPageCSS.CSS" rel="stylesheet">
 </head>
 <body>
+
 <div class="mainWindow">
-    <main class="main">
+    <div class="main">
         <div class="textPanelContainer">
             <div class="editorText">
                 <div class="textPanelText">
@@ -15,7 +16,7 @@
                 </div>
             </div>
             <div class="HTMLTextView" >
-                <code id="sourceView" contenteditable="true"></code>
+                <textarea id="sourceView" contenteditable="true"></textarea>
             </div>
         </div>
         <div class="editorPanelContainer">
@@ -38,11 +39,11 @@
             </div>
         </div>
 
-    </main>
+    </div>
 
 </div>
-<script type="text/javascript" src="tinymce/tinymce.min.js"></script>
-<script type="text/javascript" src="extEditor_tinyMCE.js"></script>
-<script type="text/javascript" src="extEditor.js"></script>
+<script type="text/javascript" src="tinymce/tinymce.min.js" defer></script>
+<script type="text/javascript" src="extEditor_tinyMCE.js" defer></script>
+<script type="text/javascript" src="extEditor.js" defer></script>
 </body>
 </html>

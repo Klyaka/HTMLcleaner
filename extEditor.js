@@ -1,9 +1,5 @@
 'usestrict';
 
-
-
-
-
 const body = document.getElementById("tinymce");
 const strongDeleteButton = document.getElementById("strongDelete");
 const spanDeleteButton = document.getElementById("spanDelete");
@@ -18,11 +14,26 @@ const pInTdtDeleteButton = document.getElementById("pInTdDelete");
 const styleDeleteButton = document.getElementById("styleDelete");
 const allAttrDeleteButton = document.getElementById("allAttrDelete");
 const almightyButton = document.getElementById("almightyButton");
-const htmlViewElement = document.getElementById("sourceView")
-
+const htmlViewElement = document.getElementById("sourceView");
 
 let innerText = undefined;
 let textToPaste = undefined;
+
+try {
+    const textEditorPanel = tinymce.activeEditor.on("input", paste);
+}
+catch{
+    console.log("tinyMCE getElement error due initialization order. Try restart")
+}
+
+htmlViewElement.addEventListener("input", e => {
+    try {
+        tinymce.activeEditor.setContent(htmlViewElement.value);
+    }
+    catch{
+        console.log("tinyMCE getElement error due initialization order. Try restart")
+    }
+})
 
 //Удаляет теги <tag ...> ... </tag ...>
 function tagRemover(thingToRemove){
@@ -142,7 +153,6 @@ function allAttrRemover(){
     while(indexLeftBr >= 0){
         if (index > indexLeftBr && index < indexRightBr){
             substring = textToPaste.substring(index, indexRightBr)
-            console.log(substring)
             stringToSave = findHref(substring);
             stringLenght = [...substring].length - [...stringToSave].length;
             textToPaste = textToPaste.replace(substring, stringToSave);
@@ -157,6 +167,7 @@ function allAttrRemover(){
         }
 
     }
+
     tinyMCE.activeEditor.setContent(textToPaste);
     innerText = undefined;
     textToPaste = undefined;
@@ -167,6 +178,8 @@ function allAttrRemover(){
 
 function paste(){
     innerText = tinymce.activeEditor.getContent();
+
+    //Добавить перенос строки после закрывающего тега
     htmlViewElement.innerText = innerText;
 }
 
@@ -201,3 +214,5 @@ almightyButton.onclick = () => {
     wordRemover("<p>&nbsp;</p>");
     paste();
 }
+
+
