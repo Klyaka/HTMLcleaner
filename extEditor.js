@@ -20,13 +20,14 @@ let innerText = undefined;
 let textToPaste = undefined;
 
 try {
-    const textEditorPanel = tinymce.activeEditor.on("input", paste);
+    tinymce.activeEditor.on("input NodeChange", paste);
 }
 catch{
     console.log("tinyMCE getElement error due initialization order. Try restart")
 }
 
-htmlViewElement.addEventListener("input", e => {
+
+htmlViewElement.addEventListener("input", () => {
     try {
         tinymce.activeEditor.setContent(htmlViewElement.value);
     }
@@ -56,7 +57,7 @@ function tagRemover(thingToRemove){
     tinyMCE.activeEditor.setContent(textToPaste);
     innerText = undefined;
     textToPaste = undefined;
-    index = undefined;
+    //index = undefined;
 }
 
 function tagRemoverMiddle(innerText, thingToRemove) {
@@ -100,7 +101,7 @@ function attributeRemover(thingToRemove){
     tinyMCE.activeEditor.setContent(textToPaste);
     innerText = undefined;
     textToPaste = undefined;
-    index = undefined;
+    //index = undefined;
 }
 
 
@@ -120,8 +121,8 @@ function tagWithinTagRemover(thingToRemove, outerTag){
     tinyMCE.activeEditor.setContent(textToPaste);
     innerText = undefined;
     textToPaste = undefined;
-    indexOuter = undefined;
-    indexOuterClose = undefined;
+    //indexOuter = undefined;
+    //indexOuterClose = undefined;
 }
 
 function findHref(textToAnalyze){
@@ -171,16 +172,15 @@ function allAttrRemover(){
     tinyMCE.activeEditor.setContent(textToPaste);
     innerText = undefined;
     textToPaste = undefined;
-    index = undefined;
-    stringLenght = undefined;
-    substring = undefined;
+    //index = undefined;
+    //stringLenght = undefined;
+    //substring = undefined;
 }
 
 function paste(){
     innerText = tinymce.activeEditor.getContent();
-
     //Добавить перенос строки после закрывающего тега
-    htmlViewElement.innerText = innerText;
+    htmlViewElement.value = innerText;
 }
 
 
