@@ -26,13 +26,19 @@ catch{
     console.log("tinyMCE getElement error due initialization order. Try restart")
 }
 
-
 htmlViewElement.addEventListener("input", () => {
     try {
         tinymce.activeEditor.setContent(htmlViewElement.value);
     }
     catch{
         console.log("tinyMCE getElement error due initialization order. Try restart")
+    }
+})
+
+document.addEventListener("keydown", (event) =>{
+    console.log(event.key)
+    if (event.ctrlKey && (event.key === "q" || event.key === "й")) {
+        tinymce.activeEditor.focus();
     }
 })
 

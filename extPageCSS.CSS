@@ -74,15 +74,15 @@ body, html {
 
 #sourceView{
     display: block;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 10px);
+    height: calc(100% - 5px);
     overflow: auto;
     word-wrap: break-word;
     white-space: pre-wrap;
     font-family: "Code New Roman" , Helvetica, serif;
     font-size: 0.9vw;
     border-radius: 0 0 0 10px;
-    padding: 0;
+    padding: 5px 5px 0 5px;
     border: 0;
     resize: none;
 }
@@ -224,9 +224,9 @@ body, html {
 
 #metaTagInputPanel{
     border-radius: 10px;
-    height: 100%;
-    width: 100%;
-    padding: 0;
+    width: calc(100% - 10px);
+    height: calc(100% - 5px);
+    padding: 5px 5px 0 5px;
     border: 0;
     resize: none;
 }
