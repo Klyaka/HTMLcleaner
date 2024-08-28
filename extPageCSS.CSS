@@ -1,24 +1,50 @@
+@font-face {
+    font-family: "Code New Roman";
+    src: url("Code New Roman.otf");
+}
+
 body, html {
     margin: 0;
-    height: 100%;
+    height: 200svh;
     width: 100%;
     min-height: 436px;
-
 }
 
 .mainWindow {
     background-color: #f5fffe;
-    height: 100%;
+    height: 100svh;
     width: 100%;
-    
 }
 
 .main{
-    background-color: #f5fffe;
+    background-image: linear-gradient(white 0% 5%, #f5fffe 65%);
     height: 100%;
     display: grid;
-    grid-template-columns: 50svw 50svw;
-    grid-template-rows: 12svh 88svh;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 12svh 80svh 8svh;
+}
+
+.mainTextLowLeft{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: -2;
+    align-self: end;
+    font-family: "Code New Roman" , Helvetica, serif;
+    font-size: 1.3vw;
+    margin-left: 0.5svw;
+    margin-bottom: 0.5vh;
+    text-decoration: underline;
+}
+
+.metaTextTopLeft{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+    font-family: "Code New Roman" , Helvetica, serif;
+    font-size: 1.3vw;
+    margin-left: 0.5svw;
+    margin-top: 0.5vh;
+    text-decoration: underline;
 }
 
 .textPanelContainer{
@@ -27,6 +53,7 @@ body, html {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
+    grid-row-end: 4;
     justify-self: center;
     align-self: center;
     display: flex;
@@ -37,11 +64,12 @@ body, html {
 
 .HTMLTextView{
     margin-left: 40px;
-    width: 45%;
+    width: 46%;
     height: 90%;
     background-color: white;
     border: 2px solid black;
     border-radius: 0 0 0 10px;
+    box-shadow: 0 0 2px black;
 }
 
 #sourceView{
@@ -51,21 +79,25 @@ body, html {
     overflow: auto;
     word-wrap: break-word;
     white-space: pre-wrap;
-    font-family: "Helvetica", "serif";
-    font-size: 1vw;
+    font-family: "Code New Roman" , Helvetica, serif;
+    font-size: 0.9vw;
     border-radius: 0 0 0 10px;
     padding: 0;
     border: 0;
     resize: none;
+}
 
+#sourceView:focus{
+    outline: none;
 }
 
 .editorText{
     background-color: aliceblue;
     height: 90%;
-    width: 45%;
+    width: 46%;
     border: 2px solid black;
     border-radius: 10px;
+    box-shadow: 0 0 2px black;
 }
 
 .textPanelText{
@@ -103,6 +135,8 @@ body, html {
     border-radius: 10px;
     display: grid;
     grid-auto-flow: column;
+    box-shadow: 0 0 2px black;
+    min-height: 20px;
 }
 
 #allInOneButton{
@@ -114,6 +148,8 @@ body, html {
     background-color: white;
     border-radius: 10px;
     display: grid;
+    box-shadow: 0 0 2px black;
+    min-height: 20px;
 
 }
 
@@ -124,7 +160,7 @@ body, html {
 }
 
 
-.upperInstrButton{
+.firstInstrButton{
     border-radius: 8px 0 0 8px;
 }
 
@@ -134,21 +170,67 @@ body, html {
 #nbspDeleteAll{
 }
 
-.lowerInstrButton{
+.lastInstrButton{
     border-radius: 0 8px 8px 0;
-
-
 }
 
 .instrButton{
     font-size: 1.2vw;
-    font-family: "Helvetica", "serif";
+    font-family: "Code New Roman" , Helvetica, serif;
     border: 0;
     padding: 0;
     background-color: white;
+    min-height: 20px;
+
 }
 
 .instrButton:hover{
     background-color: gray;
     text-decoration: underline;
+}
+
+.metaMenu{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(#f5fffe, white);
+    display:grid;
+    grid-template-columns: 5% 20% 70% 5%;
+    grid-template-rows: 2vh auto;
+}
+
+.borderLine{
+    background-color: black;
+    box-shadow: 0 0 2px black;
+    height: 1px;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 1;
+}
+
+.metaTagInputContainer{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+    height: 90%;
+    width: 80%;
+    background-color: aliceblue;
+    align-self: center;
+    justify-self: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 2px black;
+}
+
+#metaTagInputPanel{
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    resize: none;
+}
+
+#metaTagInputPanel:focus{
+    outline: none;
 }

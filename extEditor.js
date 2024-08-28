@@ -179,10 +179,25 @@ function allAttrRemover(){
 
 function paste(){
     innerText = tinymce.activeEditor.getContent();
-    //Добавить перенос строки после закрывающего тега
     htmlViewElement.value = innerText;
 }
 
+function allInOneFunction(){
+    tagRemover("strong");
+    tagRemover("span");
+    wordRemover("&nbsp;");
+    attributeRemover("dir");
+    tagRemover("i");
+    tagRemover("b");
+    tagRemover("em");
+    tagWithinTagRemover("p", "li");
+    tagWithinTagRemover("p", "td");
+    attributeRemover("style");
+    allAttrRemover();
+    wordRemover("<p></p>");
+    wordRemover("<p>&nbsp;</p>");
+    paste();
+}
 
 strongDeleteButton.onclick = () => {tagRemover("strong"); paste()};
 spanDeleteButton.onclick = () => {tagRemover("span"); paste()};
@@ -199,20 +214,7 @@ pInTdtDeleteButton.onclick = () => {tagWithinTagRemover("p", "td"); paste()};
 styleDeleteButton.onclick = () => {attributeRemover("style"); paste()};
 allAttrDeleteButton.onclick = () => {allAttrRemover(); paste()};
 almightyButton.onclick = () => {
-    tagRemover("strong");
-    tagRemover("span");
-    wordRemover("&nbsp;");
-    attributeRemover("dir");
-    tagRemover("i");
-    tagRemover("b");
-    tagRemover("em");
-    tagWithinTagRemover("p", "li");
-    tagWithinTagRemover("p", "td");
-    attributeRemover("style");
-    allAttrRemover();
-    wordRemover("<p></p>");
-    wordRemover("<p>&nbsp;</p>");
-    paste();
+    allInOneFunction()
 }
 
 
