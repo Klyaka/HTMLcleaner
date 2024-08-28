@@ -40,6 +40,7 @@ document.addEventListener("keydown", (event) =>{
     if (event.ctrlKey && (event.key === "q" || event.key === "й")) {
         tinymce.activeEditor.focus();
     }
+
 })
 
 //Удаляет теги <tag ...> ... </tag ...>

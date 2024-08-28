@@ -68,8 +68,9 @@ body, html {
     height: 90%;
     background-color: white;
     border: 2px solid black;
-    border-radius: 0 0 0 10px;
+    border-radius: 10px;
     box-shadow: 0 0 2px black;
+    overflow: hidden;
 }
 
 #sourceView{
@@ -81,10 +82,11 @@ body, html {
     white-space: pre-wrap;
     font-family: "Code New Roman" , Helvetica, serif;
     font-size: 0.9vw;
-    border-radius: 0 0 0 10px;
+    border-radius: 10px 0 0 10px;
     padding: 5px 5px 0 5px;
     border: 0;
     resize: none;
+    scrollbar-gutter: stable;
 }
 
 #sourceView:focus{
@@ -194,7 +196,7 @@ body, html {
     width: 100%;
     background-image: linear-gradient(#f5fffe, white);
     display:grid;
-    grid-template-columns: 5% 20% 70% 5%;
+    grid-template-columns: 5% 20% 20% 50% 5%;
     grid-template-rows: 2vh auto;
 }
 
@@ -229,8 +231,39 @@ body, html {
     padding: 5px 5px 0 5px;
     border: 0;
     resize: none;
+    overflow: hidden;
 }
 
 #metaTagInputPanel:focus{
     outline: none;
+    overflow: auto;
+    scrollbar-gutter: stable;
+}
+
+.metaTagInputCounter{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row: 2;
+    height: 90%;
+    width: 80%;
+    background-color: aliceblue;
+    align-self: center;
+    justify-self: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 2px black;
+}
+
+.metaTagControlPanel{
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row: 2;
+    height: 90%;
+    width: 80%;
+    background-color: aliceblue;
+    align-self: center;
+    justify-self: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 2px black;
 }
