@@ -34,6 +34,7 @@ body, html {
     margin-left: 0.5svw;
     margin-bottom: 0.5vh;
     text-decoration: underline;
+
 }
 
 .metaTextTopLeft{
@@ -67,7 +68,6 @@ body, html {
     width: 46%;
     height: 90%;
     background-color: white;
-    border: 2px solid black;
     border-radius: 10px;
     box-shadow: 0 0 2px black;
     overflow: hidden;
@@ -97,7 +97,6 @@ body, html {
     background-color: aliceblue;
     height: 90%;
     width: 46%;
-    border: 2px solid black;
     border-radius: 10px;
     box-shadow: 0 0 2px black;
 }
@@ -132,7 +131,6 @@ body, html {
     margin-top: 5vh;
     width: 60%;
     height: 50%;
-    border: 2px solid black;
     background-color: white;
     border-radius: 10px;
     display: grid;
@@ -146,7 +144,6 @@ body, html {
     margin-left: 20px;
     width: 7%;
     height: 50%;
-    border: 2px solid black;
     background-color: white;
     border-radius: 10px;
     display: grid;
@@ -156,24 +153,17 @@ body, html {
 }
 
 .sepButton{
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-
 }
 
 
 .firstInstrButton{
-    border-radius: 8px 0 0 8px;
-}
-
-#spanDelete{
-}
-
-#nbspDeleteAll{
+    border-radius: 10px 0 0 10px;
 }
 
 .lastInstrButton{
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 10px 10px 0;
 }
 
 .instrButton{
@@ -183,6 +173,7 @@ body, html {
     padding: 0;
     background-color: white;
     min-height: 20px;
+    box-shadow: 0 0 2px black;
 
 }
 
@@ -206,7 +197,7 @@ body, html {
     height: 1px;
     width: 100%;
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 6;
     grid-row: 1;
 }
 
@@ -219,25 +210,29 @@ body, html {
     background-color: aliceblue;
     align-self: center;
     justify-self: center;
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 7px;
     box-shadow: 0 0 2px black;
+    overflow: hidden;
 }
 
 #metaTagInputPanel{
-    border-radius: 10px;
+    border-radius: 7px;
     width: calc(100% - 10px);
     height: calc(100% - 5px);
-    padding: 5px 5px 0 5px;
+    padding: 3px 5px 0 5px;
     border: 0;
     resize: none;
-    overflow: hidden;
+    overflow: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: "Code New Roman" , Helvetica, serif;
+    font-size: 1vw;
 }
 
 #metaTagInputPanel:focus{
     outline: none;
-    overflow: auto;
-    scrollbar-gutter: stable;
 }
 
 .metaTagInputCounter{
@@ -245,13 +240,16 @@ body, html {
     grid-column-end: 4;
     grid-row: 2;
     height: 90%;
-    width: 80%;
-    background-color: aliceblue;
+    width: 90%;
+    background-color: #fbfbfb;
     align-self: center;
     justify-self: center;
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 7px;
     box-shadow: 0 0 2px black;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .metaTagControlPanel{
@@ -263,7 +261,91 @@ body, html {
     background-color: aliceblue;
     align-self: center;
     justify-self: center;
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 7px;
     box-shadow: 0 0 2px black;
+
+}
+
+#metaTagInputCounterHeadRow{
+    width: 100%;
+    height: 14px;
+    background-color: #edefef;
+    border-radius: 7px 7px 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    font-family: "Code New Roman", Helvetica, serif;
+    font-size: 1vw;
+}
+
+#metaTagInputCounterHeadRowLabel1{
+    width: 35%;
+    height: 14px;
+}
+
+.metaTagInputCounterBaseRow1{
+    width: 100%;
+    min-height: 14px;
+    background-color: #fbfbfb;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-family: "Code New Roman", Helvetica, serif;
+    font-size: 1vw;
+}
+
+.metaTagInputCounterBaseRow2{
+    width: 100%;
+    min-height: 14px;
+    background-color: #edefef;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-family: "Code New Roman", Helvetica, serif;
+    font-size: 1vw;
+}
+
+.metaTagInputCounterName{
+    width: 40%;
+    min-height: 14px;
+    max-height: 56px;
+    margin-left: 2%;
+    overflow-wrap: break-word;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+.metaTagInputCounterDeleteButton{
+    width: 9%;
+    padding: 0;
+    align-self: flex-start;
+    border: 0;
+    background-color: transparent;
+}
+
+.metaTagInputCounterDeleteButton:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.metaTagInputCounterCounter{
+    background-color: #e1e1e1;
+    width: 15%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.metaTagInputCounterIsDescr{
+    width: 15%;
+    text-align: center;
+
+}
+
+.metaTagInputCounterIsTitle{
+    width: 17%;
+    text-align: center;
 }

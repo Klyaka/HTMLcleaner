@@ -36,7 +36,6 @@ htmlViewElement.addEventListener("input", () => {
 })
 
 document.addEventListener("keydown", (event) =>{
-    console.log(event.key)
     if (event.ctrlKey && (event.key === "q" || event.key === "й")) {
         tinymce.activeEditor.focus();
     }
@@ -223,5 +222,24 @@ allAttrDeleteButton.onclick = () => {allAttrRemover(); paste()};
 almightyButton.onclick = () => {
     allInOneFunction()
 }
+
+
+//meta-part
+const metaTagInputElement = document.getElementById("metaTagInputPanel");
+let metaTagInputValue = undefined
+let metaTagInputArray = undefined;
+
+
+metaTagInputElement.addEventListener('input', metaTagCounter)
+
+function metaTagCounter(){
+    metaTagInputValue = metaTagInputElement.value;
+    metaTagInputValue = metaTagInputValue.replace(/[^\sа-яёА-ЯЁa-zA-Z]/gui, '').replace(/ +/g, ' ').replace(/[\r\n]+/g, '');
+    metaTagInputArray = metaTagInputValue.split(" ");
+    console.log(metaTagInputArray)
+
+}
+
+
 
 
