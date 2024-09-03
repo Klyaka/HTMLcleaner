@@ -226,20 +226,79 @@ almightyButton.onclick = () => {
 
 //meta-part
 const metaTagInputElement = document.getElementById("metaTagInputPanel");
-let metaTagInputValue = undefined
-let metaTagInputArray = undefined;
-
+const metaTagInputCounterWindow = document.getElementById("metaTagCounterWindow");
+let metaTagInputValue = undefined;
+let metaTagInputValueArray = undefined;
+let metaTagInputArray = [];
+let metaTagStateSwitch = false;
+let metaTagStringToPaste = '';
 
 metaTagInputElement.addEventListener('input', metaTagCounter)
 
 function metaTagCounter(){
+    metaTagInputArray = []
     metaTagInputValue = metaTagInputElement.value;
-    metaTagInputValue = metaTagInputValue.replace(/[^\sа-яёА-ЯЁa-zA-Z]/gui, '').replace(/ +/g, ' ').replace(/[\r\n]+/g, '');
-    metaTagInputArray = metaTagInputValue.split(" ");
-    console.log(metaTagInputArray)
+    metaTagInputValue = metaTagInputValue.replace(/[^\sа-яёА-ЯЁa-zA-Z]/gui, '').replace(/[\r\n]+/g, ' ').replace(/ +/g, ' ').trim();
+    metaTagInputValueArray = metaTagInputValue.split(" ");
 
+    if (metaTagInputValueArray[0] === ''){
+        metaTagInputValueArray.splice(0, 1)
+    }
+    //console.log(metaTagInputValueArray)
+    for (let i = 0; i < metaTagInputValueArray.length; i++) {
+        metaTagStateSwitch = false;
+        for (let j = 0; j < metaTagInputArray.length; j++) {
+            if (metaTagInputArray[j].name === metaTagInputValueArray[i]){
+                metaTagStateSwitch = true;
+                metaTagInputArray[j].count++;
+            }
+        }
+        //console.log(metaTagStateSwitch, metaTagInputValueArray)
+        if (metaTagStateSwitch === false) {
+            metaTagInputArray.push(new MetaTagObject(metaTagInputValueArray[i], 1, '-', '-'));
+
+        }
+    }
+    metaTagInputArray.sort((a, b) => parseFloat(b.count) - parseFloat(a.count));
+    metaTagInputElementAdder(metaTagInputArray);
+    console.log(metaTagInputValue, metaTagInputValueArray, metaTagInputArray);
 }
 
 
+function MetaTagObject(name, count, idDescr, isTitle){
+    this.name = name;
+    this.count = count;
+    this.isDescr = idDescr;
+    this.isTitle = isTitle;
+}
 
-
+function metaTagInputElementAdder(metaTagInputArray){
+    metaTagStateSwitch = false;
+    metaTagStringToPaste = ``;
+    for (let i = 0; i < metaTagInputArray.length; i++) {
+        if(metaTagStateSwitch === true){
+            metaTagStringToPaste += `<div class="metaTagInputCounterBaseRow1">
+    <div class="metaTagInputCounterName">${metaTagInputArray[i].name}</div>
+    <button class="metaTagInputCounterDeleteButton" id="itsme${i}"'>✕</button>
+    <div class="metaTagInputCounterCounter">${metaTagInputArray[i].count}</div>
+    <div class="metaTagInputCounterIsTitle">${metaTagInputArray[i].isTitle}</div>
+    <div class="metaTagInputCounterIsDescr">${metaTagInputArray[i].isDescr}</div>
+</div>\n`;
+        }
+        else{
+            metaTagStringToPaste +=`<div class="metaTagInputCounterBaseRow2">
+    <div class="metaTagInputCounterName">${metaTagInputArray[i].name}</div>
+    <button class="metaTagInputCounterDeleteButton" id="itsme${i}"'>✕</button>
+    <div class="metaTagInputCounterCounter">${metaTagInputArray[i].count}</div>
+    <div class="metaTagInputCounterIsTitle">${metaTagInputArray[i].isTitle}</div>
+    <div class="metaTagInputCounterIsDescr">${metaTagInputArray[i].isDescr}</div>
+</div>\n`
+        }
+        metaTagStateSwitch = !metaTagStateSwitch;
+    }
+    metaTagInputCounterWindow.replaceChildren();
+    metaTagInputCounterWindow.insertAdjacentHTML("afterbegin", metaTagStringToPaste)
+    for (let i = 0; i < metaTagInputArray.length; i++) {
+        document.getElementById(`itsme${i}`).addEventListener('click', () => {document.getElementById(`itsme${i}`).parentElement.remove()})
+    }
+}
